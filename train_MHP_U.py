@@ -26,17 +26,14 @@ class MHP(nn.Module):
     def __init__(self, input_dim=11, hidden_dim=256, output_dim=1, num_hidden_layers=5):
         super(MHP, self).__init__()
 
-        # 输入层到第一个隐藏层
         self.layers = nn.ModuleList()
         self.layers.append(nn.Linear(input_dim, hidden_dim))
         self.layers.append(nn.SiLU())
 
-        # 添加隐藏层
         for _ in range(num_hidden_layers - 1):
             self.layers.append(nn.Linear(hidden_dim, hidden_dim))
             self.layers.append(nn.SiLU())
 
-        # 最后一个隐藏层到输出层
         self.layers.append(nn.Linear(hidden_dim, output_dim))
 
     def forward(self, x):
