@@ -41,7 +41,7 @@ def ssim_3d(img1, img2, window_size=10, epsilon=1e-6):
 # Import the mesh file and the AE model
 file_path = "ah93w145.msh"
 points = read_mesh(file_path)
-zero_indices1 = np.where(points[:, 1] == 1500)[0]  # 这个命令表示找到y=1500的点，然后返回他们的行索引
+zero_indices1 = np.where(points[:, 1] == 1500)[0]  # This command finds the points where y = 1500 and returns their row indices
 x_min, x_max = np.min(points[:, 0][zero_indices1]), np.max(points[:, 0][zero_indices1])
 z_min, z_max = np.min(points[:, 2][zero_indices1]), np.max(points[:, 2][zero_indices1])
 model = torch.load("model_AE.pth")
