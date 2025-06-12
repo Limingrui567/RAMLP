@@ -14,17 +14,14 @@ class MLP(nn.Module):
     def __init__(self, input_dim=11, hidden_dim=256, output_dim=4, num_hidden_layers=5):
         super(MLP, self).__init__()
 
-        # 输入层到第一个隐藏层
         self.layers = nn.ModuleList()
         self.layers.append(nn.Linear(input_dim, hidden_dim))
         self.layers.append(nn.ReLU())
 
-        # 添加隐藏层
         for _ in range(num_hidden_layers - 1):
             self.layers.append(nn.Linear(hidden_dim, hidden_dim))
             self.layers.append(nn.ReLU())
 
-        # 最后一个隐藏层到输出层
         self.layers.append(nn.Linear(hidden_dim, output_dim))
 
     def forward(self, x):
@@ -36,17 +33,14 @@ class MHP(nn.Module):
     def __init__(self, input_dim=11, hidden_dim=256, output_dim=1, num_hidden_layers=5):
         super(MHP, self).__init__()
 
-        # 输入层到第一个隐藏层
         self.layers = nn.ModuleList()
         self.layers.append(nn.Linear(input_dim, hidden_dim))
         self.layers.append(nn.SiLU())
 
-        # 添加隐藏层
         for _ in range(num_hidden_layers - 1):
             self.layers.append(nn.Linear(hidden_dim, hidden_dim))
             self.layers.append(nn.SiLU())
 
-        # 最后一个隐藏层到输出层
         self.layers.append(nn.Linear(hidden_dim, output_dim))
 
     def forward(self, x):
@@ -68,7 +62,7 @@ class SEBlock(nn.Module):
 
     def forward(self, x):
         batch_size, channels = x.shape
-        x_se = self.global_avg_pool(x.unsqueeze(-1)).view(batch_size, channels)  # 全局池化
+        x_se = self.global_avg_pool(x.unsqueeze(-1)).view(batch_size, channels)  
         attention_weights = self.fc(x_se)
         return x * attention_weights
 
@@ -91,11 +85,10 @@ class RAMLP(nn.Module):
         x = self.output_layer(x)
         return x
 
-#导入模型和形状参数
 path_modol = "model_MLP.pth"
 path_latent_relu_6 = "latent_train_6.pt"
 
-#加载MLP模型
+#load model
 model = torch.load(path_modol).to(torch.float32)
 latent_relu_6 = torch.load(path_latent_relu_6)
 
@@ -189,7 +182,7 @@ input_min = torch.tensor([[2.0000e-01, -5.0000e+00, -0.1, -3.4106e-16, -0.2]], d
 output_max = torch.tensor([[308.1072, 238.9804, 241.2216, 1.0684]], device=device)
 output_min = torch.tensor([[-141.6986, -160.2610, -277.6957, -3.0824]], device=device)
 
-#
+# Set the range of the x-axis and y-axis for the output contour plot
 if y_loc == 0.3:
     rang_x, rang_z, num_mesh = [0.05, 1.2], [-0.18, 0.18], 400
 elif y_loc == 0.6:
@@ -199,7 +192,7 @@ elif y_loc == 0.9:
 elif y_loc == 1.2:
     rang_x, rang_z, num_mesh = [0.6, 1.4], [-0.12, 0.12], 400
 
-# 生成所有网格点
+# Generate all mesh points
 x = torch.linspace(rang_x[0], rang_x[1], num_mesh).reshape(num_mesh, 1)
 z = torch.linspace(rang_z[0], rang_z[1], num_mesh).reshape(num_mesh, 1)
 expand_x = x.repeat_interleave(z.size(0), dim=0)  # (640000, 1)
@@ -207,7 +200,7 @@ expand_z = z.repeat(x.size(0), 1)  # (640000, 1)
 expand_x_z = torch.cat((expand_x, expand_z), 1)  # (640000, 2)
 print(expand_x_z.shape)
 
-# 生成完整输入数据
+# Generate the complete input data
 data_y_ = (torch.ones((expand_x_z.shape[0], 1)) * y_loc).to(device)
 data_ma_ = (torch.ones((expand_x_z.shape[0], 1)) * Ma).to(device)
 data_aoa_ = (torch.ones((expand_x_z.shape[0], 1)) * AOA).to(device)
