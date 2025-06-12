@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 读取数据
-data = np.loadtxt("data_contour.txt")
+# read data
+data = np.loadtxt("data_contour.txt") #from generata_contour_data.py
 print(data.shape)
 
 # The data file contains three columns: x, z, flow field data
@@ -22,7 +22,7 @@ zi[np.searchsorted(np.unique(y), y), np.searchsorted(np.unique(x), x)] = flow
 # Load the ground truth; 0.6 represents the cross-section at y = 0.6
 fluent_data = np.load("naca1410_fluent_0.6.npy")
 
-error = (fluent_data[2] - zi)
+error = (fluent_data[2] - zi) # 0 represents velocity U, 1 represents velocity V, and 2 represents velocity W
 error = np.abs(error)
 
 # Plot
