@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 checkpoint_file = "checkpoint_train_AE"
 
-# 如果设备有GPU，使用GPU进行训练
+# Use GPU for training if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
