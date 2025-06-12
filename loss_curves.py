@@ -39,9 +39,9 @@ ax.set_ylim()
 
 ax.tick_params(axis='both', direction='in', which="both", labelsize=12)
 
-ax.set_xlabel("epoch", fontsize=14, fontdict=font_properties)    # X 轴标签
-ax.set_ylabel("loss", fontsize=14, fontdict=font_properties)    # Y 轴标签
-legend = ax.legend(loc='upper right', prop={'family': 'serif', 'weight': 'bold', 'style': 'italic'})  # 图例
+ax.set_xlabel("epoch", fontsize=14, fontdict=font_properties)    
+ax.set_ylabel("loss", fontsize=14, fontdict=font_properties)    
+legend = ax.legend(loc='upper right', prop={'family': 'serif', 'weight': 'bold', 'style': 'italic'})  
 for text in legend.get_texts():
     text.set_fontsize(14)
 
