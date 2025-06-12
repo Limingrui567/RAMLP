@@ -45,7 +45,7 @@ class Encoder(nn.Module):
         x3 = x3.view(x3.shape[0], -1)
         x = F.leaky_relu(self.fc1(x3))
         x = self.fc2(x)
-        return x, (x1, x2)  # 额外返回跳跃连接信息
+        return x, (x1, x2) 
 
 # ========== Decoder with Skip Connections ==========
 class Decoder(nn.Module):
@@ -66,10 +66,10 @@ class Decoder(nn.Module):
         x = x.view(-1, 128, 10, 5, 10)
 
         x = F.leaky_relu(self.dec_conv1(x))
-        x = self.dec_res1(x + skips[1])  # 加入跳跃连接
+        x = self.dec_res1(x + skips[1])  
 
         x = F.leaky_relu(self.dec_conv2(x))
-        x = self.dec_res2(x + skips[0])  # 加入跳跃连接
+        x = self.dec_res2(x + skips[0])  
 
         x = self.dec_conv3(x)
         return x
