@@ -59,7 +59,7 @@ dataset= TensorDataset(train_input, train_output)
 train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
 
 # Set hyperparameters
-num_epochs = 402
+num_epochs = 400
 batch_size = 1000
 learning_rate = 0.0005
 
