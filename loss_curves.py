@@ -3,11 +3,11 @@ from matplotlib import  pyplot as plt
 
 # load model
 MLP_losses = "/tra_losses_MLP.pth"
-MHP_U_losses = "/tra_losses_MHP_U5.pth"
-MHP_V_losses = "/tra_losses_MHP_V5.pth"
-MHP_W_losses = "/tra_losses_MHP_W5.pth"
-MHP_Cp_losses = "/tra_losses_MHP_CP5.pth"
-RAMLP_losses = "/tra_losses_RAMLP_try.pth"
+MHP_U_losses = "/tra_losses_MHP_U.pth"
+MHP_V_losses = "/tra_losses_MHP_V.pth"
+MHP_W_losses = "/tra_losses_MHP_W.pth"
+MHP_Cp_losses = "/tra_losses_MHP_CP.pth"
+RAMLP_losses = "/tra_losses_RAMLP.pth"
 
 font_properties = {
     'family': 'serif',
