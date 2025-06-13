@@ -1,4 +1,6 @@
 # RAMLP
+Note:All the provided data files for NACA1410 and NACA4421 correspond to the cases described in the paper: NACA1410 at Ma = 0.5, AOA = 5°, and NACA4421 at Ma = 0.4, AOA = –0.4.
+
 ![image](https://github.com/user-attachments/assets/fdf4ad1d-2d23-435b-93f7-2ecc0874e0bb)
 
 Fig.1. Schematic diagram of Autoencoder model structure: (a) Main architecture. (b) Residual block.
@@ -7,7 +9,7 @@ Autoencoder consists of three main components: the encoder, MLP, and decoder，a
 Both the encoder and decoder are CNN with residual blocks35 and the structure of the residual block is shown in Fig.(b).
 Description of files related to the AE:
 1. The train_AE.py script is used to train the predefined autoencoder (AE) model, which is defined in model_AE.py;
-2. After training, the model is saved as model_AE.pth. The current model_AE.pth is a pretrained model;
+2. After training, the model is saved as model_AE.pth. The current model_AE.pth is a pretrained model and, due to its large file size, has been uploaded to the Releases section；
 3. We provide a minimal sample dataset for training and validation. Due to the large file size, the dataset has been uploaded to the Releases section；
 4. The script SSIM.py is used to compute the corresponding SSIM values to evaluate the similarity between the input and output point cloud data of the AE model.
    
@@ -29,6 +31,6 @@ Description of files related to the MLP, MHP and RAMLP:
 2. After training, the model is saved as model_xx.pth. The current model_xx.pth is a pretrained model;
 3. We have uploaded a minimal sample dataset used for training in the Releases section；
 4. We have also uploaded a pretrained loss file named tra_losses_xx.pth，and the loss curves can be directly generated using the loss_curves.py script;
-5. To generate the contour plots, you first need to run the generate_contour_data.py script to produce the required data, and then use plot_contour.py to visualize and save the contour plots；
+5. To generate the contour plots, you first need to run the generate_contour_data.py script to produce the required data, and then use plot_contour.py to visualize and save the contour plots.The script plot_contour.py uses flow field data exported from Fluent on a specific plane, such as naca1410_fluent_0.6.npy, where 0.6 indicates the plane at y = 0.6；
 6. The velocity and pressure coefficient contours of different wing sections can be visualized using plot_u.py and plot_cp.py, respectively. Reference values are provided in files named nacaxx_x_xx.txt, where U denotes the velocity component in the x-direction, V denotes the velocity component in the y-direction, W denotes the velocity component in the z-direction, CP denotes the pressure coefficient, and 0.3 indicates the spanwise location at 0.3.
 
