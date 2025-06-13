@@ -90,7 +90,7 @@ path_latent_train_6 = "latent_train_relu_6.pt"
 
 model_MLP = torch.load(path_modol_mlp)
 model_MHP = torch.load(path_modol_mhp)
-model_EMLPs = torch.load(path_modol_EMLPs)
+model_RAMLP = torch.load(path_modol_ramlp)
 latent_relu_6 = torch.load(path_latent_train_6)
 
 def normalize_tensor(tensor, max_vals, min_vals):
@@ -172,13 +172,13 @@ output_min = torch.tensor([[-141.6986,  -160.26, -277.70, -3.0824]], device=devi
 data_input_ = normalize_tensor(data_input, input_max, input_min)
 data_output_mlp = model_MLP(data_input_)
 data_output_mhp = model_MHP(data_input_)
-data_output_EMLPs = model_EMLPs(data_input_)
+data_output_ramlp = model_RAMLP(data_input_)
 data_output_mlp = (data_output_mlp + 1) / 2 * (output_max - output_min) + output_min
 data_output_mhp = (data_output_mhp + 1) / 2 * (output_max - output_min) + output_min
-data_output_EMLPs = (data_output_EMLPs + 1) / 2 * (output_max - output_min) + output_min
+data_output_ramlp = (data_output_ramlp + 1) / 2 * (output_max - output_min) + output_min
 
 data_fluent = []
-path_fluent_data = "naca1410_fluent_0.3.txt"
+path_fluent_data = "naca1410_0.3.txt"
 with open(path_fluent_data, 'r') as file:
     for line in file:
 
@@ -194,7 +194,7 @@ plt.xlabel("x", fontstyle='italic', fontsize=14)
 plt.ylabel("U/$U_{in}$", fontstyle='italic', fontsize=14)
 plt.scatter(data_input[:,2].cpu().detach().numpy(), (data_output_mlp[:,0]/(Ma*340)).cpu().detach().numpy(), s=40, label="Pre_MLP", facecolors='brown', edgecolors="red", marker="^")
 plt.scatter(data_input[:,2].cpu().detach().numpy(), (data_output_mhp[:,0]/(Ma*340)).cpu().detach().numpy(), s=40, label="Pre_MHP", facecolors='peru', edgecolors="darkorange", marker="s")
-plt.scatter(data_input[:,2].cpu().detach().numpy(), (data_output_EMLPs[:,0]/(Ma*340)).cpu().detach().numpy(), s=40, label="Pre_RAMLP", facecolors='lightblue', edgecolors="blue")
+plt.scatter(data_input[:,2].cpu().detach().numpy(), (data_output_ramlp[:,0]/(Ma*340)).cpu().detach().numpy(), s=40, label="Pre_RAMLP", facecolors='lightblue', edgecolors="blue")
 if y_loc == 0.3:
     plt.xlim(0.1, 1.2)
     # plt.ylim(-0.4, 0.6)
