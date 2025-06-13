@@ -27,9 +27,10 @@ A novel fully connected neural network architecture, the residual-attention mult
 Description of files related to the MLP, MHP and RAMLP:
 1. The train_MLP.py, train_MHP_U.py, train_MHP_V.py, train_MHP_W.py, train_MHP_CP.py, and train_RAMLP.py scripts are used to train the predefined MLP, MHP and RAMLP model, And the corresponding model is directly defined within the above script
 2. After training, the model is saved as model_xx.pth. The current model_xx.pth is a pretrained model;
-3. We have also uploaded a pretrained loss file named tra_losses_xx.pth，and the loss curves can be directly generated using the loss_curves.py script;
-4. To generate the contour plots, you first need to run the generate_contour_data.py script to produce the required data, and then use plot_contour.py to visualize and save the contour plots；
-5. 
+3. We have uploaded a minimal sample dataset used for training in the Releases section；
+4. We have also uploaded a pretrained loss file named tra_losses_xx.pth，and the loss curves can be directly generated using the loss_curves.py script;
+5. To generate the contour plots, you first need to run the generate_contour_data.py script to produce the required data, and then use plot_contour.py to visualize and save the contour plots；
+6. 
 
 
 
