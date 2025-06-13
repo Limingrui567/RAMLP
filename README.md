@@ -30,5 +30,6 @@ Description of files related to the MLP, MHP and RAMLP:
 3. We have uploaded a minimal sample dataset used for training in the Releases section；
 4. We have also uploaded a pretrained loss file named tra_losses_xx.pth，and the loss curves can be directly generated using the loss_curves.py script;
 5. To generate the contour plots, you first need to run the generate_contour_data.py script to produce the required data, and then use plot_contour.py to visualize and save the contour plots；
-6. 
+6. The velocity and pressure coefficient contours of different wing sections can be visualized using plot_u.py and plot_cp.py, respectively. Reference values are provided in files named nacaxx_fluent_xx.txt, where 0.3 indicates the spanwise location at 0.3；
+7. 
 
