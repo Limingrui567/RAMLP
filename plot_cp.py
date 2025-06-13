@@ -181,7 +181,7 @@ data_output_mhp = (data_output_mhp + 1) / 2 * (output_max - output_min) + output
 data_output_ramlp = (data_output_ramlp + 1) / 2 * (output_max - output_min) + output_min
 
 data = []
-path_fluent_data = "naca1410_fluent_0.3.txt"
+path_fluent_data = "naca1410_0.3.txt"
 with open(path_fluent_data, 'r') as file:
     for line in file:
 
