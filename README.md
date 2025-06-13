@@ -2,6 +2,7 @@
 ![image](https://github.com/user-attachments/assets/fdf4ad1d-2d23-435b-93f7-2ecc0874e0bb)
 
 Fig.1. Schematic diagram of Autoencoder model structure: (a) Main architecture. (b) Residual block.
+
 Autoencoder consists of three main components: the encoder, MLP, and decoder，as shown in Fig.(a).
 Both the encoder and decoder are CNN with residual blocks35 and the structure of the residual block is shown in Fig.(b).
 Description of files related to the AE:
@@ -21,6 +22,7 @@ Fig.3. Schematic diagram of MHP model structure.
 ![image](https://github.com/user-attachments/assets/d6b4d755-c3b3-42de-86c2-298fa581d9e5)
 
 Fig.4. Schematic diagram of RAMLP model structure: (a) Main architecture. (b) SE block.
+
 A novel fully connected neural network architecture, the residual-attention multilayer perceptron (RAMLP), is proposed, and its main structure is shown in Fig. 4(a). The architecture includes the squeeze-and-excitation (SE) blocks, as shown in Fig. 4(b). 
 Description of files related to the MLP, MHP and RAMLP:
 1. The train_MLP.py, train_MHP_U.py, train_MHP_V.py, train_MHP_W.py, train_MHP_CP.py, and train_RAMLP.py scripts are used to train the predefined MLP, MHP and RAMLP model, And the corresponding model is directly defined within the above script
