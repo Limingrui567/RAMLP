@@ -78,7 +78,7 @@ class RAMLP(nn.Module):
     def forward(self, x):
         x = self.activation(self.input_layer(x))
         for layer, attn in zip(self.hidden_layers, self.attention_layers):
-            residual = x  # 残差连接
+            residual = x  
             x = self.activation(layer(x))
             x = attn(x)
             x = x + residual
