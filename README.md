@@ -20,4 +20,21 @@ Fig.3. Schematic diagram of MHP model structure.
 
 ![image](https://github.com/user-attachments/assets/d6b4d755-c3b3-42de-86c2-298fa581d9e5)
 
-Fig.3. Schematic diagram of RAMLP model structure: (a) Main architecture. (b) SE block.
+Fig.4. Schematic diagram of RAMLP model structure: (a) Main architecture. (b) SE block.
+A novel fully connected neural network architecture, the residual-attention multilayer perceptron (RAMLP), is proposed, and its main structure is shown in Fig. 4(a). The architecture includes the squeeze-and-excitation (SE) blocks, as shown in Fig. 4(b). 
+Description of files related to the MLP, MHP and RAMLP:
+1. The train_MLP.py, train_MHP_U.py, train_MHP_V.py, train_MHP_W.py, train_MHP_CP.py, and train_RAMLP.py scripts are used to train the predefined MLP, MHP and RAMLP model, And the corresponding model is directly defined within the above script
+2. After training, the model is saved as model_xx.pth. The current model_xx.pth is a pretrained model;
+3. We have also uploaded a pretrained loss file named tra_losses_xx.pth，and the loss curves can be directly generated using the loss_curves.py script;
+4. To generate the contour plots, you first need to run the generate_contour_data.py script to produce the required data, and then use plot_contour.py to visualize and save the contour plots；
+5. 
+
+
+
+
+
+
+
+
+
+ ;
