@@ -44,7 +44,7 @@ class RAMLP(nn.Module):
         super(RAMLP, self).__init__()
         self.input_layer = nn.Linear(input_dim, hidden_dim)
         self.hidden_layers = nn.ModuleList([nn.Linear(hidden_dim, hidden_dim) for _ in range(num_layers - 1)])
-        self.attention_layers = nn.ModuleList([SEBlock(hidden_dim) for _ in range(num_layers - 1)])  # 注意力层
+        self.attention_layers = nn.ModuleList([SEBlock(hidden_dim) for _ in range(num_layers - 1)])  
         self.output_layer = nn.Linear(hidden_dim, output_dim)
         self.activation = nn.SiLU()
 
