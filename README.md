@@ -32,12 +32,3 @@ Description of files related to the MLP, MHP and RAMLP:
 5. To generate the contour plots, you first need to run the generate_contour_data.py script to produce the required data, and then use plot_contour.py to visualize and save the contour plots；
 6. 
 
-
-
-
-
-
-
-
-
- ;
