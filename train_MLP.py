@@ -109,7 +109,7 @@ for epoch in range(start_epoch, num_epochs):
     loss1 = 0
     num_batch = 0
     epoch_start_time = time.time()
-    for data_train_input, data_train_output in tqdm(train_loader, file=sys.stdout): #data是一个列表，列表中的元素与batch_size一致
+    for data_train_input, data_train_output in tqdm(train_loader, file=sys.stdout): 
         data_train_input = data_train_input.to(device)
         data_train_output = data_train_output.to(device)
         outputs = model(data_train_input)
