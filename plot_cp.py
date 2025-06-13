@@ -12,7 +12,6 @@ import torch.nn.functional as F
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
-# 生成模型
 class MLP(nn.Module):
     def __init__(self, input_dim=11, hidden_dim=256, output_dim=4, num_hidden_layers=5):
         super(MLP, self).__init__()
@@ -32,9 +31,9 @@ class MLP(nn.Module):
             x = layer(x)
         return x
 
-class MultiHeadMLP(nn.Module):
+class MHP(nn.Module):
     def __init__(self, input_dim=11, hidden_dim=256, output_dim=1, num_hidden_layers=5):
-        super(MultiHeadMLP, self).__init__()
+        super(MHP, self).__init__()
 
         self.layers = nn.ModuleList()
         self.layers.append(nn.Linear(input_dim, hidden_dim))
@@ -68,9 +67,9 @@ class SEBlock(nn.Module):
         attention_weights = self.fc(x_se)
         return x * attention_weights
 
-class MLPResidualWithAttention(nn.Module):
+class RAMLP(nn.Module):
     def __init__(self, input_dim=11, hidden_dim=256, output_dim=4, num_layers=4):
-        super(MLPResidualWithAttention, self).__init__()
+        super(RAMLP, self).__init__()
         self.input_layer = nn.Linear(input_dim, hidden_dim)
         self.hidden_layers = nn.ModuleList([nn.Linear(hidden_dim, hidden_dim) for _ in range(num_layers - 1)])
         self.attention_layers = nn.ModuleList([SEBlock(hidden_dim) for _ in range(num_layers - 1)])
@@ -94,7 +93,7 @@ path_latent_train_6 = "latent_train_relu_6.pt"
 
 model_MLP = torch.load(path_modol_mlp)
 model_MHP = torch.load(path_modol_mhp)
-model_EMLPs = torch.load(path_modol_EMLPs)
+model_RAMLP = torch.load(path_modol_ramlp)
 latent_relu_6 = torch.load(path_latent_train_6)
 
 def normalize_tensor(tensor, max_vals, min_vals):
@@ -176,10 +175,10 @@ output_min = torch.tensor([[-141.6986,  -160.26, -277.70, -3.0824]], device=devi
 data_input_ = normalize_tensor(data_input, input_max, input_min)
 data_output_mlp = model_MLP(data_input_)
 data_output_mhp = model_MHP(data_input_)
-data_output_EMLPs = model_EMLPs(data_input_)
+data_output_ramlp = model_RAMLP(data_input_)
 data_output_mlp = (data_output_mlp + 1) / 2 * (output_max - output_min) + output_min
 data_output_mhp = (data_output_mhp + 1) / 2 * (output_max - output_min) + output_min
-data_output_EMLPs = (data_output_EMLPs + 1) / 2 * (output_max - output_min) + output_min
+data_output_ramlp = (data_output_ramlp + 1) / 2 * (output_max - output_min) + output_min
 
 data = []
 path_fluent_data = "naca1410_fluent_0.3.txt"
@@ -198,7 +197,7 @@ plt.xlabel("x", fontstyle='italic', fontsize=14)
 plt.ylabel("$C_{p}$", fontstyle='italic', fontsize=14)
 plt.scatter(data_input[:,2].cpu().detach().numpy(), data_output_mlp[:,3].cpu().detach().numpy(), s=40, label="Pre_MLP", facecolors='brown', edgecolors="red", marker="^")
 plt.scatter(data_input[:,2].cpu().detach().numpy(), data_output_mhp[:,3].cpu().detach().numpy(), s=40, label="Pre_MHP", facecolors='peru', edgecolors="darkorange", marker="s")
-plt.scatter(data_input[:,2].cpu().detach().numpy(), data_output_EMLPs[:,3].cpu().detach().numpy(), s=40, label="Pre_RAMLP", facecolors='lightblue', edgecolors="blue")
+plt.scatter(data_input[:,2].cpu().detach().numpy(), data_output_ramlp[:,3].cpu().detach().numpy(), s=40, label="Pre_RAMLP", facecolors='lightblue', edgecolors="blue")
 if y_loc == 0.3:
     plt.xlim(0.1, 1.2)
     plt.xticks(np.arange(0.1, 1.2, 0.2))
